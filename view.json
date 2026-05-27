@@ -1,0 +1,159 @@
+{
+	"name" : "Default",
+	"display_name" : "TMS Default View",
+	"description" : "<p>TMS Default View</p>",
+	"module_type" : "views",
+	"app_type" : "tms",
+	"category" : "tools",
+	"version" : "0.0.0",
+	"repo" : "https://github.com/sp-tms/tms-views-tools-default-public",
+	"dependencies" : 
+	{
+		"core" : 
+		{
+			"name" : "Core",
+			"version" : "0.0.0-rc.15",
+			"repo" : "https://github.com/sp-framework/core"
+		},
+		"apptype" : 
+		{
+			"name" : "Transport Management System",
+			"version" : "0.0.0",
+			"repo" : "https://github.com/sp-tms/tms"
+		},
+		"packages" : []
+	},
+	"is_subview" : false,
+	"settings" : 
+	{
+		"mandatory" : true,
+		"layouts" : 
+		[
+			{
+				"view" : "default",
+				"name" : "Default"
+			},
+			
+			{
+				"view" : "topnav",
+				"name" : "Top Navigation",
+				"active" : true
+			},
+			
+			{
+				"view" : "topnavsidebar",
+				"name" : "Top Navigation With Sidebar"
+			},
+			
+			{
+				"view" : "auth",
+				"name" : "Authentication"
+			},
+			
+			{
+				"view" : "landing",
+				"name" : "Landing Page"
+			}
+		],
+		"tags" : "Adminltetags",
+		"branding" : 
+		[
+			{
+				"brand" : "baz/logo/justlogo33x30.png",
+				"maxWidth" : 35,
+				"maxHeight" : 30
+			},
+			
+			{
+				"brand" : "baz/logo/fulllogo168x30.png",
+				"maxWidth" : 200,
+				"maxHeight" : 30
+			}
+		],
+		"head" : 
+		{
+			"doctype" : "XHTML5",
+			"title" : "SP Framework Core",
+			"meta" : 
+			{
+				"author" : "email@oyeaussie.dev",
+				"charset" : "UTF-8",
+				"keywords" : "HTML, CSS, JavaScript",
+				"viewport" : "width=device-width, initial-scale=1, shrink-to-fit=no",
+				"description" : "SP Framework Core Views"
+			},
+			"link" : 
+			{
+				"href" : 
+				{
+					"assets" : 
+					{
+						"dev" : 
+						[
+							{
+								"local" : true,
+								"asset" : "fintech/default/css/plugins.css"
+							},
+							
+							{
+								"local" : true,
+								"asset" : "fintech/default/css/core.css"
+							}
+						]
+					}
+				}
+			},
+			"script" : 
+			{
+				"src" : 
+				{
+					"assets" : 
+					{
+						"dev" : 
+						[
+							{
+								"local" : true,
+								"asset" : "fintech/default/js/header/jsHeaderDependencies.js"
+							},
+							
+							{
+								"local" : true,
+								"asset" : "fintech/default/js/header/jsHeaderCore.js"
+							},
+							
+							{
+								"local" : true,
+								"asset" : "fintech/default/js/header/jsHeaderPlugins.js"
+							}
+						]
+					}
+				}
+			}
+		},
+		"footer" : 
+		{
+			"copyright" : 
+			{
+				"fromYear" : "2014",
+				"site" : "https://github.com/sp-framework/core",
+				"name" : "SP Framework"
+			},
+			"script" : 
+			{
+				"src" : 
+				{
+					"assets" : 
+					{
+						"dev" : 
+						[
+							{
+								"local" : true,
+								"asset" : "fintech/default/js/footer/jsFooterDependencies.js"
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+}
