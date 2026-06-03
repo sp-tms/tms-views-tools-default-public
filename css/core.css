@@ -42589,3 +42589,49 @@ a.disabled {
   content: "\f067";
   padding-top: 5px;
 }
+
+.print {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+}
+
+.print[size="A4"] {
+  width: 21cm;
+  height: 29.7cm;
+}
+
+.print[size="A4"][layout="landscape"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+
+.print[size="A3"] {
+  width: 29.7cm;
+  height: 42cm;
+}
+
+.print[size="A3"][layout="landscape"] {
+  width: 42cm;
+  height: 29.7cm;
+}
+
+.print[size="A5"] {
+  width: 14.8cm;
+  height: 21cm;
+}
+
+.print[size="A5"][layout="landscape"] {
+  width: 21cm;
+  height: 14.8cm;
+}
+
+@media print {
+  .print {
+    margin: 0 auto;
+    padding: 0 !important;
+    box-shadow: 0;
+    width: 100%;
+  }
+}

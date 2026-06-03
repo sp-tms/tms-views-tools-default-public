@@ -92,12 +92,12 @@
 						[
 							{
 								"local" : true,
-								"asset" : "fintech/default/css/plugins.css"
+								"asset" : "tms/default/css/plugins.css"
 							},
 							
 							{
 								"local" : true,
-								"asset" : "fintech/default/css/core.css"
+								"asset" : "tms/default/css/core.css"
 							}
 						]
 					}
@@ -113,17 +113,17 @@
 						[
 							{
 								"local" : true,
-								"asset" : "fintech/default/js/header/jsHeaderDependencies.js"
+								"asset" : "tms/default/js/header/jsHeaderDependencies.js"
 							},
 							
 							{
 								"local" : true,
-								"asset" : "fintech/default/js/header/jsHeaderCore.js"
+								"asset" : "tms/default/js/header/jsHeaderCore.js"
 							},
 							
 							{
 								"local" : true,
-								"asset" : "fintech/default/js/header/jsHeaderPlugins.js"
+								"asset" : "tms/default/js/header/jsHeaderPlugins.js"
 							}
 						]
 					}
@@ -148,7 +148,7 @@
 						[
 							{
 								"local" : true,
-								"asset" : "fintech/default/js/footer/jsFooterDependencies.js"
+								"asset" : "tms/default/js/footer/jsFooterDependencies.js"
 							}
 						]
 					}

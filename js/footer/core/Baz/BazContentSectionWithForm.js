@@ -1,4 +1,4 @@
-/* globals define exports BazContentFieldsValidator BazContentFields paginatedPNotify Pace BazCore BazContentLoader */
+/* globals define exports BazContentFieldsValidator BazContentFields paginatedPNotify Pace BazCore BazContentLoader Swal */
 /*
 * @title                    : BazContentSectionWithForm
 * @description              : Baz Lib for Content (Sections With Form)
@@ -94,8 +94,9 @@
                         'componentId'   : componentId,
                         'sectionId'     : sectionId
                     });
-                    this._initSectionButtonsAndActions();
                 }
+
+                this._initSectionButtonsAndActions();
 
                 if ($('.btn-tool-reset-cache').length === 1) {
                     if (dataCollection.env.currentId == '0') {
@@ -113,6 +114,61 @@
 
                         BazCore.bazContent();
                     }
+                }
+
+                if ($('.btn-tool-unlock').length === 1) {
+                    $('.btn-tool-unlock').off();
+                    $('.btn-tool-unlock').click(function(e) {
+                        e.preventDefault();
+
+                        var thisButton = this;
+                        var swalSound = window.dataCollection.env.sounds.swalSound;
+
+                        Swal.fire({
+                            title                       : '<span class="text-warning"> Force remove lock?</span>',
+                            icon                        : 'question',
+                            background                  : 'rgba(0,0,0,.8)',
+                            backdrop                    : 'rgba(0,0,0,.6)',
+                            buttonsStyling              : false,
+                            confirmButtonText           : 'Yes',
+                            cancelButtonText            : 'No',
+                            customClass                 : {
+                                'confirmButton'             : 'btn btn-warning text-uppercase',
+                                'cancelButton'              : 'ml-2 btn btn-secondary text-uppercase',
+                            },
+                            showCancelButton            : true,
+                            keydownListenerCapture      : true,
+                            allowOutsideClick           : true,
+                            allowEscapeKey              : true,
+                            didOpen                     : function() {
+                                swalSound.play();
+                            }
+                        }).then((result) => {
+                            if (result.value) {
+                                //Release and delete mutex entry from env
+                                var postData = { };
+                                postData[$('#security-token').attr('name')] = $('#security-token').val();
+                                postData['mutexLock'] = window['dataCollection']['env']['mutexLock'];
+                                postData['forceRelease'] = true;
+
+                                var url = window['dataCollection']['env']['rootPath'] + window['dataCollection']['env']['currentRoute'] + '/releaseMutex';
+
+                                $.post(url, postData, function(response) {
+                                    if (response.tokenKey && response.token) {
+                                        $("#security-token").attr("name", response.tokenKey);
+                                        $("#security-token").val(response.token);
+                                    }
+
+                                    if (response.responseCode == '0') {
+                                        $(thisButton).parents('.card-header').removeClass('bg-warning').addClass('bg-primary');
+                                        $(thisButton).siblings().children().removeClass('text-primary').addClass('text-white');
+                                        $(thisButton).remove();
+                                        delete(window['dataCollection']['env']['mutexLock']);
+                                    }
+                                }, 'json');
+                            }
+                        });
+                    });
                 }
             };
 
@@ -385,6 +441,10 @@
                                             }
                                             if ($(thisButtonId).is('.updateData')) {
                                                 $('body').trigger('sectionWithFormDataUpdated');
+                                                //Delete mutex entry from env
+                                                if (window['dataCollection']['env']['mutexLock'] && window['dataCollection']['env']['mutexLock']['self']) {
+                                                    delete(window['dataCollection']['env']['mutexLock']);
+                                                }
                                             }
                                             if (dataCollection[componentId] && dataCollection[componentId][sectionId][sectionId + '-form']['onSuccessResponse']) {
                                                 dataCollection[componentId] && dataCollection[componentId][sectionId][sectionId + '-form']['onSuccessResponse'](response);
@@ -410,7 +470,6 @@
             }
 
             _proto._sectionToObj = function _sectionToObj() {
-
                 if (!dataCollection[componentId][sectionId]['data']) {
                     dataCollection[componentId][sectionId]['data'] = { };
                 }
@@ -613,16 +672,13 @@
                 dataCollection[componentId][sectionId]['BazContentSectionWithForm'] = $(this).data(DATA_KEY);
                 options = $.extend({}, Default, options);
 
-                if (!dataCollection[componentId][sectionId]['BazContentSectionWithForm']) {
-                    dataCollection[componentId][sectionId]['BazContentSectionWithForm'] = new BazContentSectionWithForm($(this), options);
-                    $(this).data(DATA_KEY, typeof options === 'string' ? 'options need to be an object and not string' : options);
-                    dataCollection[componentId][sectionId]['BazContentSectionWithForm']._init(options);
-                } else {
+                if (dataCollection[componentId][sectionId]['BazContentSectionWithForm']) {
                     delete dataCollection[componentId][sectionId]['BazContentSectionWithForm'];
-                    dataCollection[componentId][sectionId]['BazContentSectionWithForm'] = new BazContentSectionWithForm($(this), options);
-                    $(this).data(DATA_KEY, typeof options === 'string' ? 'options need to be an object and not string' : options);
-                    dataCollection[componentId][sectionId]['BazContentSectionWithForm']._init(options);
                 }
+
+                dataCollection[componentId][sectionId]['BazContentSectionWithForm'] = new BazContentSectionWithForm($(this), options);
+                $(this).data(DATA_KEY, typeof options === 'string' ? 'options need to be an object and not string' : options);
+                dataCollection[componentId][sectionId]['BazContentSectionWithForm']._init(options);
             };
 
         return BazContentSectionWithForm;
