@@ -5,7 +5,7 @@
 	"module_type" : "views",
 	"app_type" : "tms",
 	"category" : "tools",
-	"version" : "0.2.0",
+	"version" : "0.3.0",
 	"repo" : "https://github.com/sp-tms/tms-views-tools-default-public",
 	"dependencies" : 
 	{
@@ -60,14 +60,14 @@
 		[
 			{
 				"brand" : "baz/logo/justlogo33x30.png",
-				"maxWidth" : 35,
-				"maxHeight" : 30
+				"maxWidth" : 120,
+				"maxHeight" : 120
 			},
 			
 			{
 				"brand" : "baz/logo/fulllogo168x30.png",
-				"maxWidth" : 200,
-				"maxHeight" : 30
+				"maxWidth" : 900,
+				"maxHeight" : 270
 			}
 		],
 		"head" : 
