@@ -59,15 +59,15 @@
 		"branding" : 
 		[
 			{
-				"brand" : "baz/logo/justlogo33x30.png",
-				"maxWidth" : 120,
-				"maxHeight" : 120
+				"brand" : "general/logo.png",
+				"maxWidth" : 200,
+				"maxHeight" : 200
 			},
 			
 			{
-				"brand" : "baz/logo/fulllogo168x30.png",
-				"maxWidth" : 900,
-				"maxHeight" : 270
+				"brand" : "general/logo.png",
+				"maxWidth" : 200,
+				"maxHeight" : 200
 			}
 		],
 		"head" : 
@@ -100,6 +100,16 @@
 								"asset" : "tms/default/css/core.css"
 							}
 						]
+					},
+					"favicons" : 
+					{
+						"16" : "favicons/favicon-16x16.png",
+						"32" : "favicons/favicon-32x32.png",
+						"180" : "favicons/favicon-180x180.png",
+						"192" : "favicons/favicon-192x192.png",
+						"512" : "favicons/favicon-512x512.png",
+						"ico" : "favicons/favicon.ico",
+						"webmanifest" : "favicons/site.webmanifest"
 					}
 				}
 			},
